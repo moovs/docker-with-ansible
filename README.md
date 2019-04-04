@@ -12,3 +12,4 @@ my_domain ansible_ssh_host=192.168.0.0 ansible_ssh_user=my_user
 ```
 4. And run: 
 ```ansible-playbook -i hosts ./roles/docker/main.yml```
+5. You have installed docker CE & docker-compose on your host :alien:
