@@ -1,0 +1,2 @@
+[your_group]
+your_domain ansible_ssh_host=your_ip ansible_ssh_user=your_user
