@@ -21,4 +21,4 @@ my_domain ansible_ssh_host=192.168.0.0 ansible_ssh_user=my_user
 ```step 4```<br />
 to:<br />
 ```ansible-playbook -i hosts ./roles/megacli/main.yml```
-5. You have installed MegaCLI on your host :alien:
+2. You have installed MegaCLI on your host :alien:
