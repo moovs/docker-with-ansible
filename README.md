@@ -24,5 +24,5 @@ to:<br />
 2. You have installed MegaCLI on your host :alien:
 
 ***
-# Authors
+## Authors
 [Nikolay Ovsiannikov](https://www.linkedin.com/in/nikolay-ovsiannikov/) - LinkedIn
