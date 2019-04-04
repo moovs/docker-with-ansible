@@ -12,7 +12,7 @@ my_domain ansible_ssh_host=192.168.0.0 ansible_ssh_user=my_user
 ```
 Step 4. And run: 
 ```ansible-playbook -i hosts ./roles/docker/main.yml```
-Done ✅ 5. You have installed docker CE & docker-compose on your host :alien:
+Done 5. You have installed docker CE & docker-compose on your host :alien:
 
 ***
 # 2. Install [MegaCLI](http://hwraid.le-vert.net/wiki/DebianPackages) on Debian 9 (stretch) with [Ansible](https://www.ansible.com/)
