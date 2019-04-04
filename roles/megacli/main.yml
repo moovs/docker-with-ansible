@@ -1,0 +1,26 @@
+---
+- hosts: all
+  tasks:
+
+# add megacli to source list
+  - name: add megacli to source list
+    apt_repository:
+      repo: deb http://mirror.rackspace.com/hwraid.le-vert.net/debian/ jessie main
+      state: present
+
+# install PGP signature
+  - name: install PGP signature
+    apt_key:
+      url: https://hwraid.le-vert.net/debian/hwraid.le-vert.net.gpg.key
+      state: present
+
+# apt-get update cache
+  - name: apt-get update
+    apt:
+      update_cache: yes
+
+# install MegaCLi
+  - name: install megacli
+    package:
+      name: megacli
+      state: present
