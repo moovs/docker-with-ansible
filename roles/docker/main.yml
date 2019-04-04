@@ -1,0 +1,86 @@
+---
+- hosts: all
+  tasks:
+  - name: Install docker packages
+    apt:
+      name: "{{ item }}"
+      state: present
+      update_cache: yes
+    with_items:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    tags:
+      - docker
+
+# curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+  - name: Add Docker s official GPG key
+    apt_key:
+      url: https://download.docker.com/linux/debian/gpg
+      state: present
+    tags:
+      - docker
+
+# apt-key fingerprint
+  - name: Verify that we have the key with the fingerprint
+    apt_key:
+      id: 0EBFCD88
+      state: present
+    tags:
+      - docker
+
+# add-apt-repository
+  - name: Set up the stable repository
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/debian stretch stable
+      state: present
+      update_cache: yes
+    tags:
+      - docker
+
+# apt-get update
+  - name: Update apt packages
+    apt:
+      update_cache: yes
+    tags:
+      - docker
+
+# install docker-ce latetst verion
+  - name: Install docker
+    apt:
+      name: docker-ce
+      state: present
+      update_cache: yes
+    tags:
+      - docker
+
+# optional you may to add your user to docker group 
+
+# sudo groupadd docker
+#- name: Create "docker" group
+#  group:
+#    name: "{{ docker_group }}"
+#    state: present
+#  tags:
+#    - docker
+
+# sudo usermod -aG docker root
+#- name: Add remote "ubuntu" user to "docker" group
+#  user:
+#    name: "{{ remote_user }}"
+#    group: "{{ docker_group }}"
+#    append: yes
+#  tags:
+#    - docker
+
+# install docker-compose 1.24.0 version, but you can specify the version you need & apply executable permissions to the binary
+  - name: install docker-compose
+    get_url:
+      url: https://github.com/docker/compose/releases/download/1.24.0/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
+      dest: /usr/local/bin/docker-compose
+      mode: 'u+x,g+x'
+
+# you can also create a symbolic link to /usr/bin or any other directory in your path
+  - name: Create symlink
+    file: src=/usr/local/bin/docker-compose dest=/usr/bin/docker-compose state=link
