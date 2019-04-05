@@ -1,7 +1,7 @@
 # 1. Install [Docker CE](https://docs.docker.com/install/linux/docker-ce/debian/) & [docker-compose](https://docs.docker.com/compose/install/) on Debian 9 (stretch) with [Ansible](https://www.ansible.com/)
 
 1. Clone this repository locally:
-```git clone https://github.com/moovs/ansible.git```
+```git clone https://github.com/moovs/docker-with-ansible.git```
 2. Add your ssh-key to the host you want to install docker:
 ```ssh-copy-id -i ~/.ssh/id_rsa.pub user@host```
 - This logs into the server host, and copies keys to the server, and configures them to grant access by adding them to the authorized_keys file.
