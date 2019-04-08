@@ -1,34 +1,28 @@
 ---
 - hosts: all
   tasks:
+
+# install packages to allow apt to use a repository over HTTPS:
   - name: Install docker packages
     apt:
-      name: "{{ item }}"
+      pkg:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
       state: present
-      update_cache: yes
-    with_items:
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - software-properties-common
-    tags:
-      - docker
 
 # curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
   - name: Add Docker s official GPG key
     apt_key:
       url: https://download.docker.com/linux/debian/gpg
       state: present
-    tags:
-      - docker
 
 # apt-key fingerprint
   - name: Verify that we have the key with the fingerprint
     apt_key:
       id: 0EBFCD88
       state: present
-    tags:
-      - docker
 
 # add-apt-repository
   - name: Set up the stable repository
@@ -36,15 +30,11 @@
       repo: deb [arch=amd64] https://download.docker.com/linux/debian stretch stable
       state: present
       update_cache: yes
-    tags:
-      - docker
 
 # apt-get update
   - name: Update apt packages
     apt:
       update_cache: yes
-    tags:
-      - docker
 
 # install docker-ce latetst verion
   - name: Install docker
@@ -52,8 +42,6 @@
       name: docker-ce
       state: present
       update_cache: yes
-    tags:
-      - docker
 
 # optional you may to add your user to docker group 
 
@@ -62,8 +50,6 @@
 #  group:
 #    name: "{{ docker_group }}"
 #    state: present
-#  tags:
-#    - docker
 
 # sudo usermod -aG docker root
 #- name: Add remote "ubuntu" user to "docker" group
@@ -71,8 +57,6 @@
 #    name: "{{ remote_user }}"
 #    group: "{{ docker_group }}"
 #    append: yes
-#  tags:
-#    - docker
 
 # install docker-compose 1.24.0 version, but you can specify the version you need & apply executable permissions to the binary
   - name: install docker-compose
